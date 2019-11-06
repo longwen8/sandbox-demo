@@ -1,5 +1,4 @@
-package com.longwen.clock;
-
+package com.alibaba.jvm.sandbox.demo;
 import com.alibaba.jvm.sandbox.api.Information;
 import com.alibaba.jvm.sandbox.api.Module;
 import com.alibaba.jvm.sandbox.api.ProcessController;
@@ -41,6 +40,5 @@ public class BrokenClockTinkerModule implements Module {
                 });
 
     }
-
 
 }
