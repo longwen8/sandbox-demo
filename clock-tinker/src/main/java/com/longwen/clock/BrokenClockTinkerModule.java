@@ -1,4 +1,4 @@
-package com.alibaba.jvm.sandbox.demo;
+package com.longwen.clock;
 import com.alibaba.jvm.sandbox.api.Information;
 import com.alibaba.jvm.sandbox.api.Module;
 import com.alibaba.jvm.sandbox.api.ProcessController;
@@ -22,7 +22,7 @@ public class BrokenClockTinkerModule implements Module {
     public void repairCheckState() {
 
         new EventWatchBuilder(moduleEventWatcher)
-                .onClass("com.longwen.clock.Clock")
+                .onClass("com.longwen..Clock")
                 .onBehavior("checkState")
                 .onWatch(new AdviceListener() {
 
