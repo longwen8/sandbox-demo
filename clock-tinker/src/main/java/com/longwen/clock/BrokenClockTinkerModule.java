@@ -23,7 +23,7 @@ public class BrokenClockTinkerModule implements Module {
     public void repairCheckState() {
 
         new EventWatchBuilder(moduleEventWatcher)
-                .onClass("com.taobao.demo.Clock")
+                .onClass("com.longwen.clock.Clock")
                 .onBehavior("checkState")
                 .onWatch(new AdviceListener() {
 
