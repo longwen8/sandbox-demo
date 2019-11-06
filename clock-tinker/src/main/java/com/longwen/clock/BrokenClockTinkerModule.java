@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 
 @MetaInfServices(Module.class)
 @Information(id = "broken-clock-tinker")
-public class BrokenClockTinkerModule {
+public class BrokenClockTinkerModule implements Module {
 
     @Resource
     private ModuleEventWatcher moduleEventWatcher;
