@@ -15,7 +15,24 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>clock-tinker</module>
+        <module>class-loader</module>
+        <module>asm</module>
+        <module>jvmti</module>
+        <module>smartpt-test</module>
+        <module>jetty</module>
     </modules>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
 
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
