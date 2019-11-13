@@ -1,1 +1,0 @@
-Premain-Class: com.longwen.instrumentation.premain.Agent
