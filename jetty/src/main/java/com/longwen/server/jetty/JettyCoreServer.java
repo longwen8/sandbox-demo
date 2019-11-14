@@ -1,7 +1,9 @@
 package com.longwen.server.jetty;
 
 import com.longwen.server.CoreServer;
+import com.longwen.server.app.core.JvmSandbox;
 import com.longwen.server.servlet.HelloServlet;
+import com.longwen.server.servlet.ModuleHttpServlet;
 import com.longwen.server.util.Initializer;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
@@ -31,6 +33,7 @@ public class JettyCoreServer implements CoreServer {
 
     private Server httpServer;
     private CoreConfigure cig;
+    private JvmSandbox jvmSandbox;
 
     public static CoreServer getInstance(){
         if(null == coreServer){
@@ -88,7 +91,8 @@ public class JettyCoreServer implements CoreServer {
                 public void process() throws Throwable {
 
                     logger.info("initializing server. ");
-                   // jvmSandbox = new JvmSandbox(cfg, inst);
+                    //jvmSandbox = new JvmSandbox(cfg, inst);
+                    jvmSandbox = new JvmSandbox(cfg);
                     initHttpServer();
                     initJettyContextHandler();
                     httpServer.start();
@@ -180,18 +184,41 @@ public class JettyCoreServer implements CoreServer {
         }
 
         httpServer = new Server(new InetSocketAddress(serverIp, serverPort));
-//        QueuedThreadPool qtp = new QueuedThreadPool();
-//        // jetty线程设置为daemon，防止应用启动失败进程无法正常退出
-//        qtp.setDaemon(true);
-//        qtp.setName("sandbox-jetty-qtp-" + qtp.hashCode());
-//        httpServer.setThreadPool(qtp);
+        QueuedThreadPool qtp = new QueuedThreadPool();
+        // jetty线程设置为daemon，防止应用启动失败进程无法正常退出
+        qtp.setDaemon(true);
+        qtp.setName("sandbox-jetty-qtp-" + qtp.hashCode());
+        httpServer.setThreadPool(qtp);
     }
 
 
     private void initJettyContextHandler() {
         final ServletContextHandler context = new ServletContextHandler(NO_SESSIONS);
-        context.setContextPath("/");
+        final String contextPath = "/sandbox/";
+        context.setContextPath(contextPath);
+        context.setClassLoader(getClass().getClassLoader());
+
+
         context.addServlet(new ServletHolder(new HelloServlet()), "/hello");
+
+//        // web-socket-servlet
+//        final String wsPathSpec = "/module/websocket/*";
+//        logger.info("initializing ws-http-handler. path={}", contextPath + wsPathSpec);
+//        //noinspection deprecation
+//        context.addServlet(
+//                new ServletHolder(new WebSocketAcceptorServlet(jvmSandbox.getCoreModuleManager())),
+//                wsPathSpec
+//        );
+
+
+
+        // moule-http-servlet
+        final String pathSpec = "/module/http/*";
+        context.addServlet(
+                new ServletHolder(new ModuleHttpServlet(cig,jvmSandbox.getCoreModuleManager())),
+                pathSpec
+        );
+
         httpServer.setHandler(context);
     }
 
