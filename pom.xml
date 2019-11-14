@@ -3,11 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>com.alibaba.jvm.sandbox</groupId>
-        <artifactId>sandbox-module-starter</artifactId>
-        <version>1.2.2</version>
-    </parent>
+
 
     <groupId>com.longwen</groupId>
     <artifactId>sandbox-demo</artifactId>
@@ -16,23 +12,35 @@
     <modules>
         <module>clock-tinker</module>
         <module>class-loader</module>
-        <module>asm</module>
         <module>jvmti</module>
-        <module>smartpt-test</module>
+        <!--<module>smartpt-test</module>-->
         <module>jetty</module>
+        <module>jetty-module</module>
     </modules>
     <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                        <encoding>UTF-8</encoding>
 
-                </configuration>
-            </plugin>
-        </plugins>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+
+
+            </plugins>
+        </pluginManagement>
     </build>
 
 </project>

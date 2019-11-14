@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="asm" />
+        <module name="class-loader" />
+        <module name="classloader" />
+        <module name="clock-tinker" />
+        <module name="jetty" />
+        <module name="jetty-module" />
+        <module name="jvmti" />
+        <module name="jvmtl" />
+        <module name="smartpttest" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="asm" target="1.8" />
+      <module name="classloader" target="1.8" />
+      <module name="clock-tinker" target="1.8" />
+      <module name="jetty" target="1.8" />
+      <module name="jetty-module" target="1.8" />
+      <module name="jvmti" target="1.8" />
+      <module name="sandbox-demo" target="1.5" />
+      <module name="smartpt-test" target="1.6" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

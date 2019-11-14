@@ -1,0 +1,24 @@
+-classpath
+'D:/app/maven/repository/org/kohsuke/metainf-services/metainf-services/1.7/metainf-services-1.7.jar;D:/app/maven/repository/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2.jar;D:/app/maven/repository/com/alibaba/jvm/sandbox/sandbox-api/1.2.2/sandbox-api-1.2.2.jar;D:/app/maven/repository/javax/servlet/javax.servlet-api/3.0.1/javax.servlet-api-3.0.1.jar;D:/app/maven/repository/com/alibaba/jvm/sandbox/sandbox-common-api/1.2.2/sandbox-common-api-1.2.2.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'D:/MyHome/source/my/alibaba/jvm-sandbox/sandbox-demo/smartpt-test/src/main/java;D:/MyHome/source/my/alibaba/jvm-sandbox/sandbox-demo/smartpt-test/target/generated-sources/annotations'
+-author
+-bottom
+'Copyright &#169; 2019 <a href="https://github.com/alibaba">Alibaba Open Source</a>. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'D:/MyHome/source/my/alibaba/jvm-sandbox/sandbox-demo/smartpt-test/target/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'smartpt-test 1.0-SNAPSHOT API'
+-linkoffline
+'http://docs.oracle.com/javase/6/docs/api' 'D:/MyHome/source/my/alibaba/jvm-sandbox/sandbox-demo/smartpt-test/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'smartpt-test 1.0-SNAPSHOT API'

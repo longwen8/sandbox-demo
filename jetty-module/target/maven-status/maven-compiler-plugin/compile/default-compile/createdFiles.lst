@@ -1,0 +1,2 @@
+META-INF\services\com.longwen.server.app.api.Module
+com\longwen\app\module\InfoModule.class

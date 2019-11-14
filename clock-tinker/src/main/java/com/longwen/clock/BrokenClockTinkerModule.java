@@ -12,7 +12,7 @@ import org.kohsuke.MetaInfServices;
 import javax.annotation.Resource;
 
 @MetaInfServices(Module.class)
-@Information(id = "broken-clock-tinker")
+@Information(id = "broken-clock-tinker",version = "",author = "")
 public class BrokenClockTinkerModule implements Module {
 
     @Resource
@@ -27,7 +27,7 @@ public class BrokenClockTinkerModule implements Module {
                 .onWatch(new AdviceListener() {
 
                     /**
-                     * 拦截{@code com.taobao.demo.Clock#checkState()}方法，当这个方法抛出异常时将会被
+                     * 拦截{@code com.longwen.clock.Clock#checkState()}方法，当这个方法抛出异常时将会被
                      * AdviceListener#afterThrowing()所拦截
                      */
                     @Override

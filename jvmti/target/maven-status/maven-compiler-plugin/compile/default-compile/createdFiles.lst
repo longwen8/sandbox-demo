@@ -1,6 +1,11 @@
+com\longwen\asm\GeneralClassAdapter.class
 com\longwen\instrumentation\agentmain\TargetJVM.class
 com\longwen\instrumentation\premain\Agent.class
 com\longwen\instrumentation\premain\TestAgent.class
 com\longwen\instrumentation\agentmain\LoadAgent.class
+com\longwen\asm\GeneralClassAdapter$sayHelloMethodAdapter.class
 com\longwen\instrumentation\premain\TestTransformer.class
+com\longwen\asm\GenerateNewPerson.class
+com\longwen\asm\Person.class
+com\longwen\instrumentation\agentmain\Test.class
 com\longwen\instrumentation\agentmain\TestAgent.class

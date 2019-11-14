@@ -5,11 +5,13 @@ import com.longwen.server.app.core.JvmSandbox;
 import com.longwen.server.servlet.HelloServlet;
 import com.longwen.server.servlet.ModuleHttpServlet;
 import com.longwen.server.util.Initializer;
+import com.longwen.server.util.LogbackUtils;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.nio.SelectChannelConnector;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
@@ -18,9 +20,6 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-
-
 import static java.lang.String.format;
 import static com.longwen.server.util.NetworkUtils.isPortInUsing;
 import static org.eclipse.jetty.servlet.ServletContextHandler.NO_SESSIONS;
@@ -90,21 +89,25 @@ public class JettyCoreServer implements CoreServer {
                 @Override
                 public void process() throws Throwable {
 
+                    LogbackUtils.init(
+                            cig.getNamespace(),
+                            cig.getCfgLibPath() + File.separator + "sandbox-logback.xml"
+                    );
                     logger.info("initializing server. ");
                     //jvmSandbox = new JvmSandbox(cfg, inst);
-                    jvmSandbox = new JvmSandbox(cfg);
+                    jvmSandbox = new JvmSandbox(cig);
                     initHttpServer();
                     initJettyContextHandler();
                     httpServer.start();
                 }
             });
 
-//            // 初始化加载所有的模块
-//            try {
-//                jvmSandbox.getCoreModuleManager().reset();
-//            } catch (Throwable cause) {
-//                logger.warn("reset occur error when initializing.", cause);
-//            }
+            // 初始化加载所有的模块
+            try {
+                jvmSandbox.getCoreModuleManager().reset();
+            } catch (Throwable cause) {
+                logger.warn("reset occur error when initializing.", cause);
+            }
 
             final InetSocketAddress local = getLocal();
             logger.info("initialized server. actual bind to {}:{}",
@@ -186,7 +189,7 @@ public class JettyCoreServer implements CoreServer {
         httpServer = new Server(new InetSocketAddress(serverIp, serverPort));
         QueuedThreadPool qtp = new QueuedThreadPool();
         // jetty线程设置为daemon，防止应用启动失败进程无法正常退出
-        qtp.setDaemon(true);
+       // qtp.setDaemon(true);
         qtp.setName("sandbox-jetty-qtp-" + qtp.hashCode());
         httpServer.setThreadPool(qtp);
     }
@@ -194,7 +197,7 @@ public class JettyCoreServer implements CoreServer {
 
     private void initJettyContextHandler() {
         final ServletContextHandler context = new ServletContextHandler(NO_SESSIONS);
-        final String contextPath = "/sandbox/";
+        final String contextPath = "/sandbox";
         context.setContextPath(contextPath);
         context.setClassLoader(getClass().getClassLoader());
 

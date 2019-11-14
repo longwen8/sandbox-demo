@@ -1,0 +1,7 @@
+com\longwen\utils\FileUtils.class
+com\longwen\myloader\DeClassLoader.class
+com\longwen\test\DeClassLoaderTest.class
+com\longwen\myloader\DiskClassLoader.class
+com\longwen\test\DiskClassLoaderTest.class
+com\longwen\test\MyTest.class
+com\longwen\test\ClassLoaderTest.class

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/asm/asm.iml" filepath="$PROJECT_DIR$/asm/asm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/class-loader/class-loader.iml" filepath="$PROJECT_DIR$/class-loader/class-loader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/class-loader/classloader.iml" filepath="$PROJECT_DIR$/class-loader/classloader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/clock-tinker/clock-tinker.iml" filepath="$PROJECT_DIR$/clock-tinker/clock-tinker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jetty/jetty.iml" filepath="$PROJECT_DIR$/jetty/jetty.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jetty-module/jetty-module.iml" filepath="$PROJECT_DIR$/jetty-module/jetty-module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jvmti/jvmti.iml" filepath="$PROJECT_DIR$/jvmti/jvmti.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sandbox-demo.iml" filepath="$PROJECT_DIR$/sandbox-demo.iml" />
+    </modules>
+  </component>
+</project>
