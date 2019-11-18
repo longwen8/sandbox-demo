@@ -45,5 +45,15 @@ public interface ExtFilter extends Filter {
                 }
             };
         }
+
+        public static ExtFilter make(final Filter filter){
+            return (ExtFilter)filter;
+            //return filter instanceof ExtFilter ? (ExtFilter) filter:make(filter,
+            //       filter.getClass().isAnnotationPresent(),
+             //       filter.getClass().isAnnotationPresent(IncludeBootstrap.class))
+
+        }
     }
+
+
 }

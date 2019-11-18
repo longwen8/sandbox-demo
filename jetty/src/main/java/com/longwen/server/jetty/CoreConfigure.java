@@ -33,6 +33,8 @@ public class CoreConfigure {
 
     private static volatile CoreConfigure instance;
 
+    private static final String DIR_PREX = "/Users/huangxinping/java/alibaba/sandbox/"; // 目录前缀
+
     public static CoreConfigure toConfigure(final String featureString, final String propertiesFilePath) {
        //return instance = mergePropertiesFile(new CoreConfigure(featureString), propertiesFilePath);
         if(null == instance){
@@ -58,7 +60,7 @@ public class CoreConfigure {
      */
     public String getSystemModuleLibPath() {
         //return featureMap.get(KEY_SYSTEM_MODULE_LIB_PATH);
-        return "E:\\sandbox\\module";
+        return DIR_PREX+"sandbox/module";
     }
 
 
@@ -118,7 +120,7 @@ public class CoreConfigure {
      */
     public String[] getUserModuleLibPaths() {
         //return replaceWithSysPropUserHome(codec.toCollection(featureMap.get(KEY_USER_MODULE_LIB_PATH)).toArray(new String[]{}));
-        return new String[]{"E:\\sandbox\\sandbox-module"};
+        return new String[]{DIR_PREX+"sandbox/sandbox-module"};
     }
 
 
@@ -129,7 +131,7 @@ public class CoreConfigure {
      * @return 沙箱内部服务提供库目录
      */
     public String getProviderLibPath() {
-        return "E:\\sandbox\\provider";
+        return DIR_PREX+"sandbox/provider";
     }
 
 
@@ -147,10 +149,14 @@ public class CoreConfigure {
 
 
     public String getCfgLibPath(){
-        return "E:\\sandbox\\cfg";
+        return DIR_PREX+"sandbox/cfg";
     }
 
     public String getNamespace(){
         return "default";
+    }
+
+    public String getJvmSandboxHome(){
+        return DIR_PREX+"sandbox";
     }
 }

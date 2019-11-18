@@ -174,6 +174,7 @@ public class EventWatchBuilder {
     private EventWatcher build(final EventListener listener,
                                final ModuleEventWatcher.Progress progress,
                                final Event.Type... eventTypes){
+        System.out.println("moduleEventWatcher:"+moduleEventWatcher);
         final int watchId = moduleEventWatcher.watch(
                 toEventWatchCondition(),
                 listener,

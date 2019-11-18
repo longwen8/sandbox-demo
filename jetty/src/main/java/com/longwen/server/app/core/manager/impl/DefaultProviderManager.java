@@ -1,17 +1,22 @@
 package com.longwen.server.app.core.manager.impl;
 
 import com.longwen.server.app.api.Module;
+import com.longwen.server.app.api.resource.ConfigInfo;
 import com.longwen.server.app.core.classloader.ProviderClassLoader;
 import com.longwen.server.app.core.manager.ProviderManager;
 import com.longwen.server.app.core.provider.api.ModuleJarLoadingChain;
 import com.longwen.server.app.core.provider.api.ModuleLoadingChain;
 import com.longwen.server.jetty.CoreConfigure;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ServiceLoader;
@@ -68,13 +73,27 @@ public class DefaultProviderManager implements ProviderManager {
                             final File providerJarFile) throws IllegalAccessException {
         final ServiceLoader<T> serviceLoader = ServiceLoader.load(clazz, providerClassLoader);
         for (final T provider : serviceLoader) {
-           // injectResource(provider);
+            injectResource(provider);
             collection.add(provider);
             logger.info("loading provider[{}] was success from provider-jar[{}], impl={}",
                     clazz.getName(), providerJarFile, provider.getClass().getName());
         }
     }
 
+    private void injectResource(final Object provider) throws IllegalAccessException {
+        final Field[] resourceFieldArray = FieldUtils.getFieldsWithAnnotation(provider.getClass(), Resource.class);
+        if (ArrayUtils.isEmpty(resourceFieldArray)) {
+            return;
+        }
+        for (final Field resourceField : resourceFieldArray) {
+            final Class<?> fieldType = resourceField.getType();
+            // ConfigInfo注入
+            if (ConfigInfo.class.isAssignableFrom(fieldType)) {
+                final ConfigInfo configInfo = new DefaultConfigInfo(cfg);
+                FieldUtils.writeField(resourceField, provider, configInfo, true);
+            }
+        }
+    }
 
     @Override
     public void loading(final File moduleJarFile) throws Throwable {

@@ -3,21 +3,28 @@ package com.longwen.server.app.core.manager.impl;
 
 import com.longwen.server.app.api.Module;
 import com.longwen.server.app.api.ModuleException;
+import com.longwen.server.app.api.resource.ModuleEventWatcher;
 import com.longwen.server.app.core.CoreModule;
 import com.longwen.server.app.core.classloader.ModuleJarClassLoader;
 import com.longwen.server.app.core.manager.CoreLoadedClassDataSource;
 import com.longwen.server.app.core.manager.CoreModuleManager;
 import com.longwen.server.app.core.manager.ProviderManager;
 import com.longwen.server.jetty.CoreConfigure;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Resource;
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static com.longwen.server.app.api.ModuleException.ErrorCode.MODULE_LOAD_ERROR;
+import static org.apache.commons.lang3.reflect.FieldUtils.writeField;
 
 public class DefaultCoreModuleManager implements CoreModuleManager {
 
@@ -109,7 +116,7 @@ public class DefaultCoreModuleManager implements CoreModuleManager {
         final CoreModule coreModule = new CoreModule(uniqueId, moduleJarFile, moduleClassLoader, module);
 
         // 注入@Resource资源
-       // injectResourceOnLoadIfNecessary(coreModule);
+        injectResourceOnLoadIfNecessary(coreModule);
 
        // callAndFireModuleLifeCycle(coreModule, MODULE_LOAD);
 
@@ -125,6 +132,42 @@ public class DefaultCoreModuleManager implements CoreModuleManager {
         // 通知生命周期，模块加载完成
         //callAndFireModuleLifeCycle(coreModule, MODULE_LOAD_COMPLETED);
 
+    }
+
+    private void injectResourceOnLoadIfNecessary(final CoreModule coreModule) throws ModuleException {
+        try {
+            final Module module = coreModule.getModule();
+            for (final Field resourceField : FieldUtils.getFieldsWithAnnotation(module.getClass(), Resource.class)) {
+                final Class<?> fieldType = resourceField.getType();
+
+                if(ModuleEventWatcher.class.isAssignableFrom(fieldType)){
+                    final ModuleEventWatcher moduleEventWatcher = coreModule.append(new CoreModule.ReleaseResource<ModuleEventWatcher>(new DefaultModuleEventWatcher(
+                            null,
+                            classDataSource,
+                            coreModule,
+                           true,
+                            cfg.getNamespace()
+                    )) {
+                        @Override
+                        public void release() {
+                            logger.info("release all SandboxClassFileTransformer for module ={}", coreModule.getUniqueId());
+
+                        }
+                    });
+
+                    writeField(
+                            resourceField,
+                            module,
+                            moduleEventWatcher,
+                            true
+                    );
+                }
+            }
+
+
+        }catch (Exception cause) {
+            throw new ModuleException(coreModule.getUniqueId(), MODULE_LOAD_ERROR, cause);
+        }
     }
 
     @Override
