@@ -68,6 +68,7 @@ public class DefaultCoreModuleManager implements CoreModuleManager {
 
         // 2. 加载所有模块
         for (final File moduleLibDir : moduleLibDirArray) {
+            System.out.println("moduleLibDir:"+moduleLibDir.getAbsolutePath());
             // 用户模块加载目录，加载用户模块目录下的所有模块
             // 对模块访问权限进行校验
             if (moduleLibDir.exists() && moduleLibDir.canRead()) {
@@ -138,8 +139,10 @@ public class DefaultCoreModuleManager implements CoreModuleManager {
         try {
             final Module module = coreModule.getModule();
             for (final Field resourceField : FieldUtils.getFieldsWithAnnotation(module.getClass(), Resource.class)) {
+
                 final Class<?> fieldType = resourceField.getType();
 
+                System.out.println("resourceField:"+resourceField);
                 if(ModuleEventWatcher.class.isAssignableFrom(fieldType)){
                     final ModuleEventWatcher moduleEventWatcher = coreModule.append(new CoreModule.ReleaseResource<ModuleEventWatcher>(new DefaultModuleEventWatcher(
                             null,
@@ -151,6 +154,13 @@ public class DefaultCoreModuleManager implements CoreModuleManager {
                         @Override
                         public void release() {
                             logger.info("release all SandboxClassFileTransformer for module ={}", coreModule.getUniqueId());
+                            final ModuleEventWatcher moduleEventWatcher = get();
+                            if (null != moduleEventWatcher) {
+//                                for (final SandboxClassFileTransformer sandboxClassFileTransformer
+//                                        : new ArrayList<SandboxClassFileTransformer>(coreModule.getSandboxClassFileTransformers())) {
+//                                    moduleEventWatcher.delete(sandboxClassFileTransformer.getWatchId());
+//                                }
+                            }
 
                         }
                     });
@@ -185,7 +195,7 @@ public class DefaultCoreModuleManager implements CoreModuleManager {
 
         @Override
         public void onLoad(File moduleJarFile) throws Throwable {
-            System.out.println("用户文件加载回调");
+            System.out.println("用户文件加载回调"+moduleJarFile.getAbsolutePath());
             providerManager.loading(moduleJarFile);
 
         }
@@ -200,7 +210,7 @@ public class DefaultCoreModuleManager implements CoreModuleManager {
 
         @Override
         public void onLoad(String uniqueId, Class moduleClass, Module module, File moduleJarFile, ModuleJarClassLoader moduleClassLoader) throws Throwable {
-            System.out.println("用户模块加载回调");
+            System.out.println("用户模块加载回调"+uniqueId);
 
             // 如果之前已经加载过了相同ID的模块，则放弃当前模块的加载
             if (loadedModuleBOMap.containsKey(uniqueId)) {

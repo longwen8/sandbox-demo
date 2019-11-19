@@ -69,6 +69,9 @@ public class DefaultModuleEventWatcher implements ModuleEventWatcher{
                       final Event.Type... eventType){
         final int watchId = watchIdSequencer.next();
         logger.info("watchId={} 执行watch方法，module={}", watchId ,coreModule.getUniqueId());
+
+        //给对应的模块追加ClassFileTransfomer
+
         return 0;
 
     }

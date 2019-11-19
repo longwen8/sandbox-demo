@@ -106,6 +106,14 @@ public class DefaultProviderManager implements ProviderManager {
 
     @Override
     public void loading(String uniqueId, Class moduleClass, Module module, File moduleJarFile, ClassLoader moduleClassLoader) throws Throwable {
-
+        for (final ModuleLoadingChain chain : moduleLoadingChains) {
+            chain.loading(
+                    uniqueId,
+                    moduleClass,
+                    module,
+                    moduleJarFile,
+                    moduleClassLoader
+            );
+        }
     }
 }
