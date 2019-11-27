@@ -6,14 +6,17 @@ import com.longwen.server.app.core.manager.impl.DefaultLoadedClassDataSource;
 import com.longwen.server.app.core.manager.impl.DefaultProviderManager;
 import com.longwen.server.jetty.CoreConfigure;
 
+import java.lang.instrument.Instrumentation;
+
 public class JvmSandbox {
 
 
     private final CoreConfigure cfg;
     private final CoreModuleManager coreModuleManager;
-    public JvmSandbox(final CoreConfigure cfg){
+    public JvmSandbox(final CoreConfigure cfg,final Instrumentation inst){
+      //  EventListenerHandlers.getSingleton();
         this.cfg = cfg;
-        this.coreModuleManager = new DefaultCoreModuleManager(cfg,
+        this.coreModuleManager = new DefaultCoreModuleManager(cfg,inst,
                 new DefaultLoadedClassDataSource(),
                 new DefaultProviderManager(cfg));
     }

@@ -13,6 +13,7 @@ import org.eclipse.jetty.server.nio.SelectChannelConnector;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.instrument.Instrumentation;
 import java.net.InetSocketAddress;
 
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -81,7 +82,7 @@ public class JettyCoreServer implements CoreServer {
     }
 
     @Override
-    public synchronized void bind(CoreConfigure cfg) throws IOException {
+    public synchronized void bind(final CoreConfigure cfg, final Instrumentation inst) throws IOException {
 
         this.cig = cfg;
         try {
@@ -95,7 +96,7 @@ public class JettyCoreServer implements CoreServer {
                     );
                     logger.info("initializing server. ");
                     //jvmSandbox = new JvmSandbox(cfg, inst);
-                    jvmSandbox = new JvmSandbox(cig);
+                    jvmSandbox = new JvmSandbox(cig,inst);
                     initHttpServer();
                     initJettyContextHandler();
                     httpServer.start();

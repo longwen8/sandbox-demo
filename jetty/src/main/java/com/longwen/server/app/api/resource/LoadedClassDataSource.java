@@ -2,6 +2,8 @@ package com.longwen.server.app.api.resource;
 
 
 
+import com.longwen.server.app.api.filter.Filter;
+
 import java.util.Iterator;
 import java.util.Set;
 
@@ -19,7 +21,7 @@ public interface LoadedClassDataSource {
      * @param filter 扩展过滤器
      * @return 匹配的类集合
      */
-    //Set<Class<?>> find(Filter filter);
+    Set<Class<?>> find(Filter filter);
 
     /**
      * 获取所有已加载类的集合迭代器

@@ -1,9 +1,13 @@
 package com.longwen.server.jetty;
 
+import com.longwen.server.app.api.ProcessController;
 import com.longwen.server.app.api.event.Event;
+import com.longwen.server.app.api.event.EventListener;
+import com.longwen.server.app.api.filter.Filter;
 import com.longwen.server.app.api.listener.ext.Advice;
 import com.longwen.server.app.api.listener.ext.AdviceListener;
 import com.longwen.server.app.api.listener.ext.EventWatchBuilder;
+import com.longwen.server.app.api.listener.ext.EventWatchCondition;
 import com.longwen.server.app.api.resource.ModuleEventWatcher;
 import com.longwen.server.app.api.test.MockForBuilderModuleEventWatcher;
 import com.longwen.server.util.ApiQaArrayUtils;
@@ -12,7 +16,7 @@ public class EventStart {
 
     public static void main(String[] args) {
 
-         new EventStart().test();
+         new EventStart().test2();
 
     }
 
@@ -30,7 +34,22 @@ public class EventStart {
     }
 
     private void test2(){
-        ModuleEventWatcher moduleEventWatcher = null;
+        ModuleEventWatcher moduleEventWatcher = new ModuleEventWatcher() {
+            @Override
+            public int watch(Filter filter, EventListener listener, Progress progress, Event.Type... eventType) {
+                return 0;
+            }
+
+            @Override
+            public int watch(Filter filter, EventListener listener, Event.Type... eventType) {
+                return 0;
+            }
+
+            @Override
+            public int watch(EventWatchCondition eventWatchCondition, EventListener eventListener, Progress progress, Event.Type... eventType) {
+                return 0;
+            }
+        };
 
         new EventWatchBuilder(moduleEventWatcher)
                 .onClass("com.longwen.clock.Clock")
@@ -46,7 +65,7 @@ public class EventStart {
 
                         // 在此，你可以通过ProcessController来改变原有方法的执行流程
                         // 这里的代码意义是：改变原方法抛出异常的行为，变更为立即返回；void返回值用null表示
-                        //ProcessController.returnImmediately(null);
+                        ProcessController.returnImmediately(null);
                     }
                 });
     }

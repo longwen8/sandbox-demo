@@ -3,6 +3,7 @@ package com.longwen.server;
 import com.longwen.server.jetty.CoreConfigure;
 
 import java.io.IOException;
+import java.lang.instrument.Instrumentation;
 import java.net.InetSocketAddress;
 
 /**
@@ -34,7 +35,7 @@ public interface CoreServer {
      * 服务器信息绑定
      * @throws IOException
      */
-    void bind(CoreConfigure cig)throws IOException;
+    void bind(CoreConfigure cig,Instrumentation inst)throws IOException;
 
     /**
      * 销毁服务器

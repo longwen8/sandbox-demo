@@ -2,14 +2,13 @@ package com.longwen.server.app.core;
 
 import com.longwen.server.app.api.Module;
 import com.longwen.server.app.core.classloader.ModuleJarClassLoader;
+import com.longwen.server.app.core.manager.impl.SandboxClassFileTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * 模块内核封装对象
@@ -30,8 +29,8 @@ public class CoreModule {
 
 
 //    // 模块的类转换器
-//    private final Set<SandboxClassFileTransformer> sandboxClassFileTransformers
-//            = new LinkedHashSet<SandboxClassFileTransformer>();
+    private final Set<SandboxClassFileTransformer> sandboxClassFileTransformers
+            = new LinkedHashSet<SandboxClassFileTransformer>();
 
     // 模块所持有的可释放资源
     private final List<ReleaseResource<?>> releaseResources
@@ -143,6 +142,14 @@ public class CoreModule {
     }
 
 
+    /**
+     * 获取模块所创建的SandboxClassFileTransformer集合
+     *
+     * @return 模块所创建的SandboxClassFileTransformer集合
+     */
+    public Set<SandboxClassFileTransformer> getSandboxClassFileTransformers() {
+        return sandboxClassFileTransformers;
+    }
 
     @Override
     public String toString() {

@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
 import java.io.File;
+import java.lang.instrument.Instrumentation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,6 +32,7 @@ public class DefaultCoreModuleManager implements CoreModuleManager {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private final CoreConfigure cfg;
+    private final Instrumentation inst;
     private final CoreLoadedClassDataSource classDataSource;
     private final ProviderManager providerManager;
     //模块目录
@@ -40,9 +42,11 @@ public class DefaultCoreModuleManager implements CoreModuleManager {
 
 
     public DefaultCoreModuleManager(final CoreConfigure cfg,
+                                    final Instrumentation inst,
                                     final CoreLoadedClassDataSource classDataSource,
                                     final ProviderManager providerManager){
         this.cfg = cfg;
+        this.inst = inst;
         this.classDataSource = classDataSource;
         this.providerManager = providerManager;
         this.moduleLibDirArray = mergeFileArray(

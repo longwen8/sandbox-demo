@@ -33,7 +33,7 @@ public class CoreConfigure {
 
     private static volatile CoreConfigure instance;
 
-    private static final String DIR_PREX = "/Users/huangxinping/java/alibaba/sandbox/"; // 目录前缀
+    private static final String DIR_PREX = "E:/"; // 目录前缀
 
     public static CoreConfigure toConfigure(final String featureString, final String propertiesFilePath) {
        //return instance = mergePropertiesFile(new CoreConfigure(featureString), propertiesFilePath);

@@ -99,13 +99,13 @@ public interface ClassStructure {
      *
      * @return 行为结构集合
      */
-    //List<BehaviorStructure> getBehaviorStructures();
+    List<BehaviorStructure> getBehaviorStructures();
 
     /**
      * 获取结构的访问修饰描述
      *
      * @return 访问修饰描述
      */
-    //Access getAccess();
+    Access getAccess();
 
 }

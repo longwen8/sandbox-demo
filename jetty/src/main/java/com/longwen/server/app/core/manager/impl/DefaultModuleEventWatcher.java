@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.instrument.Instrumentation;
+import java.util.List;
 
 import static com.longwen.server.app.api.filter.ExtFilter.ExtFilterFactory.make;
 import static com.longwen.server.app.core.util.matcer.ExtFilterMatcher.toOrGroupMatcher;
@@ -69,10 +70,22 @@ public class DefaultModuleEventWatcher implements ModuleEventWatcher{
                       final Event.Type... eventType){
         final int watchId = watchIdSequencer.next();
         logger.info("watchId={} 执行watch方法，module={}", watchId ,coreModule.getUniqueId());
-
+        logger.info("EventListener={} progress={} eventtype={}", listener ,progress,eventType);
         //给对应的模块追加ClassFileTransfomer
+        final SandboxClassFileTransformer sandClassFileTransformer = new SandboxClassFileTransformer(
+                watchId, coreModule.getUniqueId(), matcher, listener, isEnableUnsafe, eventType, namespace);
+        coreModule.getSandboxClassFileTransformers().add(sandClassFileTransformer);
 
-        return 0;
+        // 注册到JVM加载上ClassFileTransformer处理新增的类
+        //inst.addTransformer(sandClassFileTransformer, true);
+        final List<Class<?>> waitingReTransformClasses = classDataSource.findForReTransform(matcher);
+        logger.info("watch={} in module={} found {} classes for watch(ing).",
+                watchId,
+                coreModule.getUniqueId(),
+                waitingReTransformClasses.size()
+        );
+
+        return watchId;
 
     }
 }
