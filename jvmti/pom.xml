@@ -47,7 +47,7 @@
                     <compilerArguments>
                         <extdirs>libs</extdirs>
                         <verbose/>
-                        <bootclasspath>D:/app/java/jdk1.8.0_144/jdk1.8.0_144/jre/lib/rt.jar;D:/app/java/jdk1.8.0_144/jdk1.8.0_144/jre/lib/jce.jar;D:/app/java/jdk1.8.0_144/jdk1.8.0_144/jre/lib/jsse.jar</bootclasspath>
+                        <bootclasspath>${java.home}/lib/rt.jar:${java.home}/lib/jce.jar:${java.home}/lib/jsse.jar</bootclasspath>
                     </compilerArguments>
                 </configuration>
             </plugin>
