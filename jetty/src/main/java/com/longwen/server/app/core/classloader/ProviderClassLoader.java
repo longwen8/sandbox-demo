@@ -12,8 +12,8 @@ public class ProviderClassLoader extends RoutingURLClassLoader {
                 new URL[]{new URL("file:" + providerJarFile.getPath())},
                 new Routing(
                         sandboxClassLoader,
-                        "^com\\.alibaba\\.jvm\\.sandbox\\.api\\..*",
-                        "^com\\.alibaba\\.jvm\\.sandbox\\.provider\\..*",
+                        "^com\\.longwen\\.sever\\.app\\.api\\..*",
+                        "^com\\.longwen\\.server\\.app.\\core\\.provider\\..*",
                         "^javax\\.annotation\\.Resource.*$"
                 )
         );

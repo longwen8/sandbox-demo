@@ -25,5 +25,14 @@
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-websocket:8.1.2.v20120308" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-util:8.1.2.v20120308" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-io:8.1.2.v20120308" level="project" />
+    <orderEntry type="module-library">
+      <library name="Maven: com.sun:tools:1.8">
+        <CLASSES>
+          <root url="jar://D:/app/java/jdk18102_64/lib/tools.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

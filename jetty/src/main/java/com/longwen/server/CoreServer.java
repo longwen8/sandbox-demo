@@ -40,6 +40,6 @@ public interface CoreServer {
     /**
      * 销毁服务器
      */
-    void destory();
+    void destroy();
 
 }

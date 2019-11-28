@@ -48,7 +48,7 @@ public class ModuleJarClassLoader extends RoutingURLClassLoader {
                 new URL[]{new URL("file:" + tempModuleJarFile.getPath())},
                 new Routing(
                         ModuleJarClassLoader.class.getClassLoader(),
-                        "^com\\.longwen\\.app\\.api\\..*",
+                        "^com\\.longwen\\.server\\.app\\.api\\..*",
                         "^javax\\.servlet\\..*",
                         "^javax\\.annotation\\.Resource.*$"
                 )

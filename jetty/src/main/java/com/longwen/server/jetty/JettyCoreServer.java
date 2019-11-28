@@ -158,7 +158,7 @@ public class JettyCoreServer implements CoreServer {
     }
 
     @Override
-    public void destory() {
+    public void destroy() {
         // 关闭HTTP服务器
         if (isBind()) {
             try {
@@ -190,7 +190,7 @@ public class JettyCoreServer implements CoreServer {
         httpServer = new Server(new InetSocketAddress(serverIp, serverPort));
         QueuedThreadPool qtp = new QueuedThreadPool();
         // jetty线程设置为daemon，防止应用启动失败进程无法正常退出
-       // qtp.setDaemon(true);
+        qtp.setDaemon(true);
         qtp.setName("sandbox-jetty-qtp-" + qtp.hashCode());
         httpServer.setThreadPool(qtp);
     }

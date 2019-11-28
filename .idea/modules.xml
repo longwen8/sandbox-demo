@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/class-loader/class-loader.iml" filepath="$PROJECT_DIR$/class-loader/class-loader.iml" />
       <module fileurl="file://$PROJECT_DIR$/clock-tinker/clock-tinker.iml" filepath="$PROJECT_DIR$/clock-tinker/clock-tinker.iml" />
       <module fileurl="file://$PROJECT_DIR$/jetty/jetty.iml" filepath="$PROJECT_DIR$/jetty/jetty.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jetty-agent/jetty-agent.iml" filepath="$PROJECT_DIR$/jetty-agent/jetty-agent.iml" />
       <module fileurl="file://$PROJECT_DIR$/jetty-module/jetty-module.iml" filepath="$PROJECT_DIR$/jetty-module/jetty-module.iml" />
       <module fileurl="file://$PROJECT_DIR$/jvmti/jvmtl.iml" filepath="$PROJECT_DIR$/jvmti/jvmtl.iml" />
       <module fileurl="file://$PROJECT_DIR$/sandbox-demo.iml" filepath="$PROJECT_DIR$/sandbox-demo.iml" />
