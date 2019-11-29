@@ -17,7 +17,7 @@ public class JvmSandbox {
       //  EventListenerHandlers.getSingleton();
         this.cfg = cfg;
         this.coreModuleManager = new DefaultCoreModuleManager(cfg,inst,
-                new DefaultLoadedClassDataSource(),
+                new DefaultLoadedClassDataSource(inst,false),
                 new DefaultProviderManager(cfg));
     }
 

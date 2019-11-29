@@ -77,7 +77,7 @@ public class DefaultModuleEventWatcher implements ModuleEventWatcher{
         coreModule.getSandboxClassFileTransformers().add(sandClassFileTransformer);
 
         // 注册到JVM加载上ClassFileTransformer处理新增的类
-        //inst.addTransformer(sandClassFileTransformer, true);
+        inst.addTransformer(sandClassFileTransformer, true);
         final List<Class<?>> waitingReTransformClasses = classDataSource.findForReTransform(matcher);
         logger.info("watch={} in module={} found {} classes for watch(ing).",
                 watchId,
